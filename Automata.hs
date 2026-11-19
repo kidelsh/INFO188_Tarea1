@@ -10,19 +10,15 @@ module Automata
     import Data.Bits (testBit)
 
     -- 1. Modelo del Autómata Celular
-    data Automata = Automata
-    { celdas     :: [Bool]
-    , regla      :: Int
-    , generacion :: Int
-    } deriving (Show, Eq)
+    data Automata = Automata { celdas :: [Bool], regla :: Int, generacion :: Int } deriving (Show, Eq)
 
     -- 2. Inicialización (1 celda viva al centro)
     crearAutomata :: Int -> Int -> Automata
     crearAutomata ancho numRegla =
-    let izq = ancho `div` 2
-        der = ancho - izq - 1
-        listaInicial = replicate izq False ++ [True] ++ replicate der False
-    in Automata listaInicial numRegla 0
+        let izq = ancho `div` 2
+            der = ancho - izq - 1
+            listaInicial = replicate izq False ++ [True] ++ replicate der False
+        in Automata listaInicial numRegla 0
 
     -- 3. Transforma vecindad (Bool, Bool, Bool) a un entero (0 a 7)
     vecindadAEntero :: (Bool, Bool, Bool) -> Int
@@ -35,12 +31,12 @@ module Automata
     -- 5. Aplica bordes periódicos y avanza 1 generación
     paso :: Automata -> Automata
     paso (Automata lista r g) =
-    let izq = last lista : init lista
-        cen = lista
-        der = tail lista ++ [head lista]
-        tuplas = zip3 izq cen der
-        nuevaLista = [consultarBit (vecindadAEntero x) r | x <- tuplas]
-    in Automata nuevaLista r (g + 1)
+        let izq = last lista : init lista
+            cen = lista
+            der = tail lista ++ [head lista]
+            tuplas = zip3 izq cen der
+            nuevaLista = [consultarBit (vecindadAEntero x) r | x <- tuplas]
+        in Automata nuevaLista r (g + 1)
 
     -- 6. Formateo visual (Bool -> '#'/ ' ')
     renderizar :: Automata -> String

@@ -5,24 +5,23 @@ import Automata
 
 -- Función 5: Recorre y ejecuta las N generaciones imprimiendo cada paso
 ejecutarSimulacion :: Int -> Automata -> IO ()
-ejecutarSimulacion limiteGen autoInicial = 
-        | limiteGen <= 0 = return()
-        | otherwise = do
-          putStrLn (renderizar auto)
-          ejecutarSimulacion (limiteGen -1) (paso auto)
+ejecutarSimulacion limiteGen auto
+  | limiteGen <= 1 = putStrLn (renderizar auto)
+  | otherwise      = do
+    putStrLn (renderizar auto)
+    ejecutarSimulacion (limiteGen - 1) (paso auto)
 
 main :: IO ()
 main = do
-  args <- getArgs
-  case args of
-    [strRegla, strAncho, strGeneraciones] -> do
-      let numRegla      = read strRegla :: Int
-          ancho         = read strAncho :: Int
-          generaciones  = read strGeneraciones :: Int
+      args <- getArgs
+      case args of
+           [strRegla, strAncho, strGeneraciones] -> do
+             let numRegla = read strRegla :: Int
+                 ancho = read strAncho :: Int
+                 generaciones = read strGeneraciones :: Int
 
-      let estadoInicial = crearAutomata ancho numRegla
-      
-      -- Invoca la ejecución de las generaciones
-      ejecutarSimulacion generaciones estadoInicial
+             let estadoInicial = crearAutomata ancho numRegla
 
-    _ -> putStrLn "Uso: ./prog <regla> <ancho> <generaciones>"
+             ejecutarSimulacion generaciones estadoInicial
+
+           _ -> putStrLn "Uso: ./prog <regla> <ancho> <generaciones>"
