@@ -8,7 +8,7 @@ ejecutarSimulacion :: Int -> Automata -> IO ()
 ejecutarSimulacion limiteGen autoInicial = 
         | limiteGen <= 0 = return()
         | otherwise = do
-          putStrLn (mostrarAutomata auto)
+          putStrLn (renderizar auto)
           ejecutarSimulacion (limiteGen -1) (paso auto)
 
 main :: IO ()
