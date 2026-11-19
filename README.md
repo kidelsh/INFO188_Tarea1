@@ -23,4 +23,12 @@ Para compilar el proyecto y generar el ejecutable `prog`, ejecuta:
 
 ```bash
 make
+```
+
+##Ejecución
+
+Para ejecutar el proyecto se ejecuta en la terminal: 
+
+```bash
 ./prog <regla> <ancho> <generaciones>
+```
