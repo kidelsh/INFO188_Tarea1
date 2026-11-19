@@ -5,7 +5,11 @@ import Automata
 
 -- Función 5: Recorre y ejecuta las N generaciones imprimiendo cada paso
 ejecutarSimulacion :: Int -> Automata -> IO ()
-ejecutarSimulacion limiteGen autoInicial = error "Pendiente: implementar ejecutarSimulacion"
+ejecutarSimulacion limiteGen autoInicial = 
+        | limiteGen <= 0 = return()
+        | otherwise = do
+          putStrLn (mostrarAutomata auto)
+          ejecutarSimulacion (limiteGen -1) (paso auto)
 
 main :: IO ()
 main = do
