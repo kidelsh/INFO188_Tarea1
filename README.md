@@ -25,7 +25,7 @@ Para compilar el proyecto y generar el ejecutable `prog`, ejecuta:
 make
 ```
 
-##Ejecución
+## Ejecución
 
 Para ejecutar el proyecto se ejecuta en la terminal: 
 
